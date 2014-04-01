@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>AzureMagic</id>
+        <version>$version$</version>
+        <title>AzureMagic</title>
+        <authors>Tim Murphy</authors>
+        <owners>Tim Murphy</owners>
+        <licenseUrl>https://github.com/AzureMagic/AzureMagic/blob/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/AzureMagic/AzureMagic</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Collection of utility classes by Tim Murphy.</description>
+        <copyright>Copyright (c) 2013-2014 Tim Murphy</copyright>
+    </metadata>
+    <files>
+        <file src="..\Projects\AzureMagic\bin\Release\AzureMagic.*" target="lib/net40"/>
+    </files>
+</package>

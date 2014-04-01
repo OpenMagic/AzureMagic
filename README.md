@@ -1,2 +1,3 @@
-AzureMagic
-==========
+# AzureMagic
+
+Collection of Azure utility classes.

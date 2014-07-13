@@ -26,6 +26,18 @@ if not "%PackageVersion%" == "" (
    set version=-Version %PackageVersion%
 )
 
+echo Restoring packages...
+echo -------------------------------
+rem Packages must be explicity restored otherwise NullGuard.Fody does not run.
+rem
+rem Packages folder must be packages otherwise MyGet will push dependant
+rem packages to my feed.
+echo.
+.nuget\nuget restore -PackagesDirectory .\packages
+if not "%errorlevel%" == "0" goto Error
+echo.
+echo.
+
 echo Building solution...
 echo -------------------------------
 echo.
@@ -41,15 +53,20 @@ echo.
 
 if "%GallioEcho%" == "" (
 
-  echo Running tests with xUnit...
-  Packages\xunit.runners.1.9.2\tools\xunit.console.clr4.exe Projects\AzureMagic.Tests\bin\Release\AzureMagic.Tests.dll"
-  
-) else (
+  if exist "C:\Program Files\Gallio\bin\Gallio.Echo.exe" (
 
-  echo Running tests with Gallio...
-  "%GallioEcho%" Projects\AzureMagic.Tests\bin\Release\AzureMagic.Tests.dll
+    echo Setting GallioEcho environment variable...
+    set GallioEcho=""C:\Program Files\Gallio\bin\Gallio.Echo.exe""
+    
+  ) else (
+
+	echo Gallio is required to run unit tests. Try cinst Gallio.
+	goto Error
+	
+  )
 )
 
+"%GallioEcho%" Projects\AzureMagic.Tests\bin\Release\AzureMagic.Tests.dll
 if not "%errorlevel%" == "0" goto Error
 echo.
 echo.

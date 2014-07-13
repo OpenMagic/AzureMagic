@@ -77,12 +77,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Tools\AzureStorageTableEmulator.feature.cs">
+    <Compile Include="Features\Tools\WindowsAzureStorageEmulatorManager.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AzureStorageTableEmulator.feature</DependentUpon>
+      <DependentUpon>WindowsAzureStorageEmulatorManager.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Tools\Steps\AzureStorageTableEmulatorSteps.cs" />
+    <Compile Include="Features\Tools\Steps\WindowsAzureStorageEmulatorManagerSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Tools\AzureStorageTableEmulator.feature">
+    <None Include="Features\Tools\WindowsAzureStorageEmulatorManager.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AzureStorageTableEmulator.feature.cs</LastGenOutput>
+      <LastGenOutput>WindowsAzureStorageEmulatorManager.feature.cs</LastGenOutput>
     </None>
     <None Include="Packages.config" />
   </ItemGroup>

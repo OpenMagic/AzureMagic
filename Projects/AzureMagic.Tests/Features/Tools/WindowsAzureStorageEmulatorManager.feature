@@ -1,6 +1,4 @@
-﻿# These tests individual pass but in same run all 4 passing is rare. Hence why they are ignored.
-
-Feature: WindowsAzureStorageEmulatorManager
+﻿Feature: WindowsAzureStorageEmulatorManager
 
 Scenario: Start emulator when it is not running
 	Given the Windows Azure Storage Emulator is not running

@@ -78,13 +78,13 @@ namespace AzureMagic.Tests.Features.Tools
         public virtual void StartEmulatorWhenItIsNotRunning()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Start emulator when it is not running", ((string[])(null)));
-#line 5
+#line 3
 this.ScenarioSetup(scenarioInfo);
-#line 6
+#line 4
  testRunner.Given("the Windows Azure Storage Emulator is not running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
+#line 5
  testRunner.When("StartEmulator is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 8
+#line 6
  testRunner.Then("IsEmulatorRunning returns true", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -96,13 +96,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void StartEmulatorWhenItIsRunning()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Start emulator when it is running", ((string[])(null)));
-#line 10
+#line 8
 this.ScenarioSetup(scenarioInfo);
-#line 11
+#line 9
  testRunner.Given("the Windows Azure Storage Emulator is running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 12
+#line 10
  testRunner.When("StartEmulator is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 13
+#line 11
  testRunner.Then("IsEmulatorRunning returns true", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -114,13 +114,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void StopEmulatorWhenItIsNotRunning()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Stop emulator when it is not running", ((string[])(null)));
-#line 15
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 16
+#line 14
  testRunner.Given("the Windows Azure Storage Emulator is not running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
+#line 15
  testRunner.When("StopEmulator is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
+#line 16
  testRunner.Then("IsEmulatorRunning returns false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -132,13 +132,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void StopEmulatorWhenItIsRunning()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Stop emulator when it is running", ((string[])(null)));
-#line 20
+#line 18
 this.ScenarioSetup(scenarioInfo);
-#line 21
+#line 19
  testRunner.Given("the Windows Azure Storage Emulator is running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
+#line 20
  testRunner.When("StopEmulator is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 23
+#line 21
  testRunner.Then("IsEmulatorRunning returns false", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

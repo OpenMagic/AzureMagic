@@ -64,12 +64,19 @@ if "%GallioEcho%" == "" (
 	goto Error
 	
   )
+) else (
+
+  echo Cannot run unit tests on MyGet build server because it does not have Windows Azure Storage Emulator.
+  goto SkipUnitTests
 )
+
 
 "%GallioEcho%" Projects\AzureMagic.Tests\bin\Release\AzureMagic.Tests.dll
 if not "%errorlevel%" == "0" goto Error
 echo.
 echo.
+
+:SkipUnitTests
 
 echo Building NuGet package...
 echo -------------------------

@@ -83,9 +83,13 @@
       <Private>True</Private>
       <HintPath>..\..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureStorage.cs" />
+    <Compile Include="AzureTableRepository.cs" />
+    <Compile Include="Exceptions\AzureMagicException.cs" />
+    <Compile Include="Exceptions\AzureTableRepositoryException.cs" />
     <Compile Include="Tools\WindowAzureStorageEmulatorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

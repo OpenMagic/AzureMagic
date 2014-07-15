@@ -18,15 +18,15 @@ namespace AzureMagic.Tests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class AzureTableRepositoryFeature : Xunit.IUseFixture<AzureTableRepositoryFeature.FixtureData>, System.IDisposable
+    public partial class AzureTableRepository_ConstructorFeature : Xunit.IUseFixture<AzureTableRepository_ConstructorFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "AzureTableRepository.feature"
+#line 1 "AzureTableRepository.Constructor.feature"
 #line hidden
         
-        public AzureTableRepositoryFeature()
+        public AzureTableRepository_ConstructorFeature()
         {
             this.TestInitialize();
         }
@@ -34,7 +34,7 @@ namespace AzureMagic.Tests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AzureTableRepository", "", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AzureTableRepository.Constructor", "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -77,7 +77,7 @@ namespace AzureMagic.Tests.Features
 #line hidden
         }
         
-        public virtual void SetFixture(AzureTableRepositoryFeature.FixtureData fixtureData)
+        public virtual void SetFixture(AzureTableRepository_ConstructorFeature.FixtureData fixtureData)
         {
         }
         
@@ -87,11 +87,11 @@ namespace AzureMagic.Tests.Features
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when connectionString is null")]
-        public virtual void ConstructorWhenConnectionStringIsNull()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when connectionString is null")]
+        public virtual void WhenConnectionStringIsNull()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when connectionString is null", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when connectionString is null", ((string[])(null)));
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -107,11 +107,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when connectionString is empty")]
-        public virtual void ConstructorWhenConnectionStringIsEmpty()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when connectionString is empty")]
+        public virtual void WhenConnectionStringIsEmpty()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when connectionString is empty", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when connectionString is empty", ((string[])(null)));
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -127,11 +127,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when tableName is null")]
-        public virtual void ConstructorWhenTableNameIsNull()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when tableName is null")]
+        public virtual void WhenTableNameIsNull()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when tableName is null", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when tableName is null", ((string[])(null)));
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -147,11 +147,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when tableName is empty")]
-        public virtual void ConstructorWhenTableNameIsEmpty()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when tableName is empty")]
+        public virtual void WhenTableNameIsEmpty()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when tableName is empty", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when tableName is empty", ((string[])(null)));
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -167,11 +167,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when createTableIfNotExists is true and table does not exist")]
-        public virtual void ConstructorWhenCreateTableIfNotExistsIsTrueAndTableDoesNotExist()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when createTableIfNotExists is true and table does not exist")]
+        public virtual void WhenCreateTableIfNotExistsIsTrueAndTableDoesNotExist()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when createTableIfNotExists is true and table does not exist", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when createTableIfNotExists is true and table does not exist", ((string[])(null)));
 #line 29
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -189,11 +189,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when createTableIfNotExists is true and table does exist")]
-        public virtual void ConstructorWhenCreateTableIfNotExistsIsTrueAndTableDoesExist()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when createTableIfNotExists is true and table does exist")]
+        public virtual void WhenCreateTableIfNotExistsIsTrueAndTableDoesExist()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when createTableIfNotExists is true and table does exist", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when createTableIfNotExists is true and table does exist", ((string[])(null)));
 #line 35
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -211,11 +211,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when createTableIfNotExists is false and table does not exist")]
-        public virtual void ConstructorWhenCreateTableIfNotExistsIsFalseAndTableDoesNotExist()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when createTableIfNotExists is false and table does not exist")]
+        public virtual void WhenCreateTableIfNotExistsIsFalseAndTableDoesNotExist()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when createTableIfNotExists is false and table does not exist", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when createTableIfNotExists is false and table does not exist", ((string[])(null)));
 #line 41
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -233,11 +233,11 @@ this.FeatureBackground();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository")]
-        [Xunit.TraitAttribute("Description", "Constructor when createTableIfNotExists is false and table does exist")]
-        public virtual void ConstructorWhenCreateTableIfNotExistsIsFalseAndTableDoesExist()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Constructor")]
+        [Xunit.TraitAttribute("Description", "when createTableIfNotExists is false and table does exist")]
+        public virtual void WhenCreateTableIfNotExistsIsFalseAndTableDoesExist()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Constructor when createTableIfNotExists is false and table does exist", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("when createTableIfNotExists is false and table does exist", ((string[])(null)));
 #line 47
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -261,12 +261,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                AzureTableRepositoryFeature.FeatureSetup();
+                AzureTableRepository_ConstructorFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                AzureTableRepositoryFeature.FeatureTearDown();
+                AzureTableRepository_ConstructorFeature.FeatureTearDown();
             }
         }
     }

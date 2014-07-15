@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using AzureMagic.Exceptions;
@@ -23,17 +24,26 @@ namespace AzureMagic
             }
         }
 
-        public async Task AddEntity(TEntity entity)
+        public async Task<TableResult> AddEntity(TEntity entity)
         {
-            // todo: unit tests
             try
             {
+                if (string.IsNullOrWhiteSpace(entity.PartitionKey))
+                {
+                    throw new ValidationException("PartitionKey cannot be null or whitespace.");
+                }
+
+                if (entity.RowKey == null)
+                {
+                    throw new ValidationException("RowKey cannot be null.");
+                }
+
                 var insert = TableOperation.Insert(entity);
                 var result = await Table.ExecuteAsync(insert);
 
                 if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
                 {
-                    return;
+                    return result;
                 }
 
                 var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode)result.HttpStatusCode);

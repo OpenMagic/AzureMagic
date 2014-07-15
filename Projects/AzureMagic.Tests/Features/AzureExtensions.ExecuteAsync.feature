@@ -9,4 +9,4 @@ Background:
 
 Scenario: ExecuteAsync
 	When I call ExecuteAsync
-	Then all rows are returned
+	Then all partition keys are returned

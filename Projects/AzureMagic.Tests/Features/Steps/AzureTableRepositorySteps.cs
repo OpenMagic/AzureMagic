@@ -20,12 +20,12 @@ namespace AzureMagic.Tests.Features.Steps
         private bool CreateTableIfNotExists;
         private DummyTableEntity[] ExpectedDummyEntities;
         private DummyTableEntity ExpectedDummyEntity;
-        private DummyTableEntity[] ActualDummyEntities;
         private Exception Exception;
         private AzureTableRepository<DummyTableEntity> Repository;
         private string TableName;
         private TableResult TableResult;
         private TableQuery<DummyTableEntity> Query;
+        private string[] PartitionKeys;
 
         private AggregateException AggregateException
         {
@@ -371,15 +371,15 @@ namespace AzureMagic.Tests.Features.Steps
             var repository = CreateRepository();
             var query = 
                 from entity in repository.Query()
-                select entity;
+                select entity.PartitionKey;
 
-            ActualDummyEntities = query.ExecuteAsync<DummyTableEntity, DummyTableEntity>().Result.ToArray();
+            PartitionKeys = query.ExecuteAsync().Result.ToArray();
         }
 
-        [Then(@"all rows are returned")]
-        public void ThenAllRowsAreReturned()
+        [Then(@"all partition keys are returned")]
+        public void ThenAllPartitionKeysAreReturned()
         {
-            ActualDummyEntities.ShouldAllBeEquivalentTo(ExpectedDummyEntities, EntityEquivalencyOptions);
+            PartitionKeys.ShouldAllBeEquivalentTo(ExpectedDummyEntities.Select(e => e.PartitionKey));
         }
     }
 }

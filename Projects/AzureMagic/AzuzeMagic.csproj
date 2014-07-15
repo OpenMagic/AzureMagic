@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureQueryExtensions.cs" />
     <Compile Include="AzureStorage.cs" />
     <Compile Include="AzureTableRepository.cs" />
     <Compile Include="Exceptions\AzureMagicException.cs" />

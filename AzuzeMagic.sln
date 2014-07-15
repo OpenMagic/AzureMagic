@@ -20,8 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMagic.Tests", "Projects\AzureMagic.Tests\AzureMagic.Tests.csproj", "{17D49CFB-402E-499F-8618-AF5FD6255A5F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{E0E4C7B7-869F-4E4B-BEAE-4551FE4F1B12}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\MyGet.bat = Scripts\MyGet.bat
@@ -31,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{E0E4
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5B1D8887-BE55-4B96-A872-7748FF7B02FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureMagic.Tests", "Projects\AzureMagic.Tests\AzureMagic.Tests.csproj", "{17D49CFB-402E-499F-8618-AF5FD6255A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

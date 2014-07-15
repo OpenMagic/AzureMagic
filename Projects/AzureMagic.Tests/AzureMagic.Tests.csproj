@@ -116,6 +116,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\AzureExtensions.ExecuteAsync.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureExtensions.ExecuteAsync.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\AzureTableRepository.Query.feature.cs">
       <DependentUpon>AzureTableRepository.Query.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -147,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\AzureExtensions.ExecuteAsync.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AzureExtensions.ExecuteAsync.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\AzureTableRepository.Query.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureTableRepository.Query.feature.cs</LastGenOutput>

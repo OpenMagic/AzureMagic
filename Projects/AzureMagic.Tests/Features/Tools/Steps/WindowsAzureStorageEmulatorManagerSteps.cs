@@ -51,7 +51,7 @@ namespace AzureMagic.Tests.Features.Tools.Steps
         private static void Sleep()
         {
             // A little sleep after each Given & When ensures the Then will pass when all 4 scenarios are run.
-            Thread.Sleep(75);
+            Thread.Sleep(1000);
         }
     }
 }

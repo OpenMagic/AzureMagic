@@ -17,13 +17,19 @@ namespace AzureMagic.Tests.Features.Steps
     public class AzureTableRepositorySteps : StepsBase
     {
         private string ConnectionString;
-        private string TableName;
         private bool CreateTableIfNotExists;
-        private Exception Exception;
-        private AzureTableRepository<DummyTableEntity> Repository;
         private DummyTableEntity[] DummyEntities;
         private DummyTableEntity DummyEntity;
+        private Exception Exception;
+        private AzureTableRepository<DummyTableEntity> Repository;
+        private string TableName;
         private TableResult TableResult;
+        private TableQuery<DummyTableEntity> Query;
+
+        private AggregateException AggregateException
+        {
+            get { return (AggregateException)Exception; }
+        }
 
         [Given(@"Windows Azure Storage Emulator is running")]
         public void GivenWindowsAzureStorageEmulatorIsRunning()
@@ -85,19 +91,7 @@ namespace AzureMagic.Tests.Features.Steps
         [Given(@"table does exist")]
         public void GivenTableDoesExist()
         {
-            DummyEntities = new[]
-            {
-                new DummyTableEntity(true)
-            };
-
-            var table = AzureStorage.GetTable(ConnectionString, TableName);
-
-            table.Create();
-
-            foreach (var fakeRow in DummyEntities)
-            {
-                table.Execute(TableOperation.Insert(fakeRow));
-            }
+            AddDummyEntities();
         }
 
         [Then(@"the table is created")]
@@ -134,7 +128,7 @@ namespace AzureMagic.Tests.Features.Steps
                     break;
 
                 case "valid":
-                    DummyEntity = new DummyTableEntity(initializeProperties: true);
+                    DummyEntity = new DummyTableEntity(true);
                     break;
 
                 case "invalid":
@@ -204,7 +198,7 @@ namespace AzureMagic.Tests.Features.Steps
         {
             partitionKey = GetValue(partitionKey);
 
-            DummyEntity = new DummyTableEntity(true) { PartitionKey =  partitionKey };
+            DummyEntity = new DummyTableEntity(true) { PartitionKey = partitionKey };
         }
 
         [Given(@"entity has '(.*)' RowKey")]
@@ -233,13 +227,82 @@ namespace AzureMagic.Tests.Features.Steps
             AggregateException.InnerExceptions.Single().InnerException.Should().BeOfType<ValidationException>();
         }
 
+        [Given(@"table has entities")]
+        public void GivenTableHasEntities()
+        {
+            Repository = CreateRepository(true);
+        }
+
+        [When(@"Query is called")]
+        public void WhenQueryIsCalled()
+        {
+            Query = Repository.Query();
+        }
+
+        [Then(@"TableQuery<TEntity> is returned")]
+        public void ThenTableQueryIsReturned()
+        {
+            Query.Should().BeOfType<TableQuery<DummyTableEntity>>();
+        }
+
+        [Then(@"entities can be read")]
+        public void ThenEntitiesCanBeRead()
+        {
+            var actualEntities = Query.Execute();
+
+            actualEntities.ShouldAllBeEquivalentTo(DummyEntities, EntityEquivalencyOptions);
+        }
+
         #region " Helpers "
 
-        private AggregateException AggregateException { get { return (AggregateException)Exception; } }
-
-        private AzureTableRepository<DummyTableEntity> CreateRepository()
+        private CloudTable AddDummyEntities()
         {
-            return new AzureTableRepository<DummyTableEntity>(ConnectionString, TableName, CreateTableIfNotExists);
+            return AddDummyEntities(CreateTable());
+        }
+
+        private CloudTable AddDummyEntities(CloudTable table)
+        {
+            DummyTableEntity dummyEntity = null;
+            DummyEntities = Enumerable.Range(1, 10).Select(i => new DummyTableEntity(true)).ToArray();
+
+            try
+            {
+                foreach (var item in DummyEntities)
+                {
+                    dummyEntity = item;
+                    table.Execute(TableOperation.Insert(dummyEntity));
+                }
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format("Cannot add DummyEntities/{0}/{1}.", dummyEntity.PartitionKey, dummyEntity.RowKey);
+                var exception = new Exception(message, ex);
+
+                throw exception;
+            }
+
+            return table;
+        }
+
+        private CloudTable CreateTable()
+        {
+            var table = AzureStorage.GetTable(ConnectionString, TableName);
+
+            table.CreateIfNotExists();
+
+            return table;
+        }
+
+        private AzureTableRepository<DummyTableEntity> CreateRepository(bool addDummyEntities = false)
+        {
+            var repository = new AzureTableRepository<DummyTableEntity>(ConnectionString, TableName, CreateTableIfNotExists);
+
+            if (addDummyEntities)
+            {
+                AddDummyEntities();
+            }
+
+            return repository;
         }
 
         private EquivalencyAssertionOptions<DummyTableEntity> EntityEquivalencyOptions(EquivalencyAssertionOptions<DummyTableEntity> options)
@@ -292,8 +355,7 @@ namespace AzureMagic.Tests.Features.Steps
 
             base.Cleanup();
         }
-    }
 
         #endregion
-
+    }
 }

@@ -56,63 +56,9 @@ namespace AzureMagic
             }
         }
 
-        public Task DeleteEntityByPartitionKey(string partitionKey)
-        {
-            // todo: unit tests
-            throw new NotImplementedException("DeleteEntityByPartitionKeyAsync");
-        }
-        
-        public async Task<IEnumerable<TEntity>> FindAllEntities()
-        {
-            // todo: unit tests
-            return await FindEntitiesWhere(null);
-        }
-
-        public async Task<IEnumerable<TEntity>> FindEntitiesByPartitionKey(string partitionKey)
-        {
-            // todo: unit tests
-            return await FindEntitiesWhere(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partitionKey));
-        }
-
-        public async Task<IEnumerable<TEntity>> FindEntitiesWhere([AllowNull] string filterCondition)
-        {
-            // todo: unit tests
-            var isFiltered = filterCondition != null;
-
-            try
-            {
-                var query = new TableQuery<TEntity>();
-
-                if (isFiltered)
-                {
-                    query = query.Where(filterCondition);
-                }
-
-                var items = new List<TEntity>();
-                TableQuerySegment<TEntity> currentSegment = null;
-
-                while (currentSegment == null || currentSegment.ContinuationToken != null)
-                {
-                    var token = currentSegment != null ? currentSegment.ContinuationToken : null;
-                    currentSegment = await Table.ExecuteQuerySegmentedAsync(query, token);
-
-                    items.AddRange(currentSegment.Results);
-                }
-
-                return items;
-            }
-            catch (Exception exception)
-            {
-                var message = isFiltered ?
-                    string.Format("Cannot get entities from {0} where {1}.", Table.Name, filterCondition) :
-                    string.Format("Cannot get entities from {0}.", Table.Name);
-
-                throw new AzureTableRepositoryException(message, exception);
-            }
-        }
-
         public TableQuery<TEntity> Query()
         {
+            
             // todo: unit tests
             return Table.CreateQuery<TEntity>();
         }

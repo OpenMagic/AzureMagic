@@ -121,6 +121,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AzureExtensions.ExecuteAsync.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\AzureTableRepository.DeleteEntity.feature.cs">
+      <DependentUpon>AzureTableRepository.DeleteEntity.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Features\AzureTableRepository.Query.feature.cs">
       <DependentUpon>AzureTableRepository.Query.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -155,6 +160,10 @@
     <None Include="Features\AzureExtensions.ExecuteAsync.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureExtensions.ExecuteAsync.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AzureTableRepository.DeleteEntity.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AzureTableRepository.DeleteEntity.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\AzureTableRepository.Query.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

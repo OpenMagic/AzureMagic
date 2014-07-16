@@ -125,7 +125,7 @@ this.FeatureBackground();
 #line 18
  testRunner.And("TableResult is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
- testRunner.And("TableResult.HttpStatusCode should be \'Deleted\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("TableResult.HttpStatusCode should be \'No Content\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -145,9 +145,11 @@ this.FeatureBackground();
 #line 23
  testRunner.When("DeleteEntity is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
- testRunner.And("InnerExceptions is AzureTableRepositoryException", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("AggregateException is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 25
- testRunner.And("InnerException is ValidationException", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("InnerExceptions is AzureTableRepositoryException", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
+ testRunner.And("InnerException is StorageException", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

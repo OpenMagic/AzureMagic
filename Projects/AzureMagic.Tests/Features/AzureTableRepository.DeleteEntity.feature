@@ -16,10 +16,11 @@ Scenario: when entity does exist
 	When DeleteEntity is called
 	Then entity is deleted from the table
 	And TableResult is returned
-	And TableResult.HttpStatusCode should be 'Deleted'
+	And TableResult.HttpStatusCode should be 'No Content'
 
 Scenario: when entity does not exist
 	Given the entity does not exist
 	When DeleteEntity is called
+	Then AggregateException is thrown
 	And InnerExceptions is AzureTableRepositoryException
-	And InnerException is ValidationException
+	And InnerException is StorageException

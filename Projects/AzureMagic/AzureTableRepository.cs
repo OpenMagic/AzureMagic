@@ -56,11 +56,32 @@ namespace AzureMagic
             }
         }
 
+        public async Task<TableResult> DeleteEntity(TEntity entity)
+        {
+            try
+            {
+                var delete = TableOperation.Delete(entity);
+                var result = await Table.ExecuteAsync(delete);
+
+                if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
+                {
+                    return result;
+                }
+
+                var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode)result.HttpStatusCode);
+                throw new AzureTableRepositoryException(message);
+            }
+            catch (Exception exception)
+            {
+                var message = string.Format("Cannot delete {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey);
+                throw new AzureTableRepositoryException(message, exception);
+            }
+        }
+
         public TableQuery<TEntity> Query()
         {
-            
-            // todo: unit tests
             return Table.CreateQuery<TEntity>();
         }
+
     }
 }

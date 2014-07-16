@@ -8,6 +8,7 @@ using AzureMagic.Tests.Support;
 using AzureMagic.Tools;
 using FluentAssertions;
 using FluentAssertions.Equivalency;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using TechTalk.SpecFlow;
 
@@ -369,7 +370,7 @@ namespace AzureMagic.Tests.Features.Steps
         public void WhenICallExecuteAsync()
         {
             var repository = CreateRepository();
-            var query = 
+            var query =
                 from entity in repository.Query()
                 select entity.PartitionKey;
 
@@ -380,6 +381,48 @@ namespace AzureMagic.Tests.Features.Steps
         public void ThenAllPartitionKeysAreReturned()
         {
             PartitionKeys.ShouldAllBeEquivalentTo(ExpectedDummyEntities.Select(e => e.PartitionKey));
+        }
+
+        [Given(@"the entity does exist")]
+        public void GivenTheEntityDoesExist()
+        {
+            Repository = CreateRepository(true);
+            ExpectedDummyEntity = ExpectedDummyEntities.First();
+        }
+
+        [When(@"DeleteEntity is called")]
+        public void WhenDeleteEntityIsCalled()
+        {
+            try
+            {
+                TableResult = Repository.DeleteEntity(ExpectedDummyEntity).Result;
+            }
+            catch (Exception exception)
+            {
+                Exception = exception;
+            }
+        }
+
+        [Then(@"entity is deleted from the table")]
+        public void ThenEntityIsDeletedFromTheTable()
+        {
+            var expectedEntities = ExpectedDummyEntities.Skip(1).ToArray();
+            var actualEntities = FindAllEntities().ToArray();
+
+            actualEntities.ShouldAllBeEquivalentTo(expectedEntities, EntityEquivalencyOptions);
+        }
+
+        [Given(@"the entity does not exist")]
+        public void GivenTheEntityDoesNotExist()
+        {
+            Repository = CreateRepository(true);
+            ExpectedDummyEntity = new DummyTableEntity(true) { ETag = "*"};
+        }
+
+        [Then(@"InnerException is StorageException")]
+        public void ThenInnerExceptionIsStorageException()
+        {
+            AggregateException.InnerExceptions.Single().InnerException.Should().BeOfType<StorageException>();
         }
     }
 }

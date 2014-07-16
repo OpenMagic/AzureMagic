@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using AzureMagic.Exceptions;
 using Microsoft.WindowsAzure.Storage.Table;
-using NullGuard;
 
 namespace AzureMagic
 {
@@ -26,6 +24,16 @@ namespace AzureMagic
 
         public async Task<TableResult> AddEntity(TEntity entity)
         {
+            return await ExecuteOperation("add", TableOperation.Insert(entity), entity);
+        }
+
+        public async Task<TableResult> DeleteEntity(TEntity entity)
+        {
+            return await ExecuteOperation("delete", TableOperation.Delete(entity), entity);
+        }
+
+        private async Task<TableResult> ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
+        {
             try
             {
                 if (string.IsNullOrWhiteSpace(entity.PartitionKey))
@@ -38,8 +46,7 @@ namespace AzureMagic
                     throw new ValidationException("RowKey cannot be null.");
                 }
 
-                var insert = TableOperation.Insert(entity);
-                var result = await Table.ExecuteAsync(insert);
+                var result = await Table.ExecuteAsync(operation);
 
                 if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
                 {
@@ -51,15 +58,13 @@ namespace AzureMagic
             }
             catch (Exception exception)
             {
-                var message = string.Format("Cannot add {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey);
+                var message = string.Format("Cannot {3} {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey, operationName);
                 throw new AzureTableRepositoryException(message, exception);
             }
         }
 
         public TableQuery<TEntity> Query()
         {
-            
-            // todo: unit tests
             return Table.CreateQuery<TEntity>();
         }
     }

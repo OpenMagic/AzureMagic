@@ -9,7 +9,7 @@
         <licenseUrl>https://github.com/AzureMagic/AzureMagic/blob/master/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/AzureMagic/AzureMagic</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Collection of utility classes by Tim Murphy.</description>
+        <description>Collection of Azure utility classes.</description>
         <copyright>Copyright (c) 2013-2014 Tim Murphy</copyright>
     </metadata>
     <files>

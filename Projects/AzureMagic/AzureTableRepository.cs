@@ -42,6 +42,23 @@ namespace AzureMagic
             return await ExecuteOperationAsync("delete", TableOperation.Delete(entity), entity);
         }
 
+        public async Task<TableResult> UpdateEntityAsync(TEntity entity, bool forceUpdate = false)
+        {
+            // todo: unit tests
+
+            if (forceUpdate)
+            {
+                entity.ETag = "*";
+            }
+
+            if (string.IsNullOrWhiteSpace(entity.ETag))
+            {
+                throw new ValidationException("ETag cannot be null or whitespace.");
+            }
+
+            return await ExecuteOperationAsync("update", TableOperation.Replace(entity), entity);
+        }
+
         public TableQuery<TEntity> Query()
         {
             return Table.CreateQuery<TEntity>();

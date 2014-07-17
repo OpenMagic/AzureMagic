@@ -7,6 +7,7 @@ namespace AzureMagic
     {
         Task<TableResult> AddEntityAsync(TEntity entity);
         Task<TableResult> DeleteEntityAsync(TEntity entity);
+        Task<TableResult> UpdateEntityAsync(TEntity entity, bool forceUpdate);
         TableQuery<TEntity> Query();
     }
 }

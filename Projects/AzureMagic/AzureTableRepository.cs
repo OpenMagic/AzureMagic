@@ -16,18 +16,8 @@ namespace AzureMagic
         {
         }
 
-        public AzureTableRepository(CloudTableClient tableClient, bool createTableIfNotExists = true) :
-            this(tableClient, new TableNameResolver(), createTableIfNotExists)
-        {
-        }
-
         public AzureTableRepository(CloudTableClient tableClient, string tableName, bool createTableIfNotExists = true) :
             this(tableClient.GetTableReference(tableName), createTableIfNotExists)
-        {
-        }
-
-        public AzureTableRepository(CloudTableClient tableClient, ITableNameResolver tableNameResolver, bool createTableIfNotExists = true) :
-            this(tableClient.GetTableReference(tableNameResolver.GetTableName(typeof(TEntity))), createTableIfNotExists)
         {
         }
 

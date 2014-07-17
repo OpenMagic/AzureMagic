@@ -7,7 +7,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzureMagic
 {
-    public class AzureTableRepository<TEntity> where TEntity : ITableEntity, new()
+    public class AzureTableRepository<TEntity> : IAzureTableRepository<TEntity> where TEntity : ITableEntity, new()
     {
         private readonly CloudTable Table;
 
@@ -52,6 +52,11 @@ namespace AzureMagic
             return await ExecuteOperation("delete", TableOperation.Delete(entity), entity);
         }
 
+        public TableQuery<TEntity> Query()
+        {
+            return Table.CreateQuery<TEntity>();
+        }
+
         private async Task<TableResult> ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
         {
             try
@@ -68,12 +73,12 @@ namespace AzureMagic
 
                 var result = await Table.ExecuteAsync(operation);
 
-                if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
+                if (result.HttpStatusCode == (int) HttpStatusCode.NoContent)
                 {
                     return result;
                 }
 
-                var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode)result.HttpStatusCode);
+                var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode) result.HttpStatusCode);
                 throw new AzureTableRepositoryException(message);
             }
             catch (Exception exception)
@@ -81,11 +86,6 @@ namespace AzureMagic
                 var message = string.Format("Cannot {3} {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey, operationName);
                 throw new AzureTableRepositoryException(message, exception);
             }
-        }
-
-        public TableQuery<TEntity> Query()
-        {
-            return Table.CreateQuery<TEntity>();
         }
     }
 }

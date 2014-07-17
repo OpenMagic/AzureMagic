@@ -254,7 +254,7 @@ namespace AzureMagic.Tests.Features.Steps
 
             try
             {
-                TableResult = repository.AddEntity(ExpectedDummyEntity).Result;
+                TableResult = repository.AddEntityAsync(ExpectedDummyEntity).Result;
             }
             catch (Exception exception)
             {
@@ -395,7 +395,7 @@ namespace AzureMagic.Tests.Features.Steps
         {
             try
             {
-                TableResult = Repository.DeleteEntity(ExpectedDummyEntity).Result;
+                TableResult = Repository.DeleteEntityAsync(ExpectedDummyEntity).Result;
             }
             catch (Exception exception)
             {

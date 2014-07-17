@@ -5,8 +5,8 @@ namespace AzureMagic
 {
     public interface IAzureTableRepository<TEntity> where TEntity : ITableEntity, new()
     {
-        Task<TableResult> AddEntity(TEntity entity);
-        Task<TableResult> DeleteEntity(TEntity entity);
+        Task<TableResult> AddEntityAsync(TEntity entity);
+        Task<TableResult> DeleteEntityAsync(TEntity entity);
         TableQuery<TEntity> Query();
     }
 }

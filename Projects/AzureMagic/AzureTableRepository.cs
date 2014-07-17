@@ -32,14 +32,14 @@ namespace AzureMagic
             }
         }
 
-        public async Task<TableResult> AddEntity(TEntity entity)
+        public async Task<TableResult> AddEntityAsync(TEntity entity)
         {
-            return await ExecuteOperation("add", TableOperation.Insert(entity), entity);
+            return await ExecuteOperationAsync("add", TableOperation.Insert(entity), entity);
         }
 
-        public async Task<TableResult> DeleteEntity(TEntity entity)
+        public async Task<TableResult> DeleteEntityAsync(TEntity entity)
         {
-            return await ExecuteOperation("delete", TableOperation.Delete(entity), entity);
+            return await ExecuteOperationAsync("delete", TableOperation.Delete(entity), entity);
         }
 
         public TableQuery<TEntity> Query()
@@ -47,7 +47,7 @@ namespace AzureMagic
             return Table.CreateQuery<TEntity>();
         }
 
-        private async Task<TableResult> ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
+        private async Task<TableResult> ExecuteOperationAsync(string operationName, TableOperation operation, TEntity entity)
         {
             try
             {

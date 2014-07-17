@@ -11,10 +11,30 @@ namespace AzureMagic
     {
         private readonly CloudTable Table;
 
-        public AzureTableRepository(string connectionString, string tableName, bool createTableIfNotExists = true)
+        public AzureTableRepository(string connectionString, string tableName, bool createTableIfNotExists = true) :
+            this(AzureStorage.GetTable(connectionString, tableName), createTableIfNotExists)
+        {
+        }
+
+        public AzureTableRepository(CloudTableClient tableClient, bool createTableIfNotExists = true) :
+            this(tableClient, new TableNameResolver(), createTableIfNotExists)
+        {
+        }
+
+        public AzureTableRepository(CloudTableClient tableClient, string tableName, bool createTableIfNotExists = true) :
+            this(tableClient.GetTableReference(tableName), createTableIfNotExists)
+        {
+        }
+
+        public AzureTableRepository(CloudTableClient tableClient, ITableNameResolver tableNameResolver, bool createTableIfNotExists = true) :
+            this(tableClient.GetTableReference(tableNameResolver.GetTableName(typeof(TEntity))), createTableIfNotExists)
+        {
+        }
+
+        public AzureTableRepository(CloudTable table, bool createTableIfNotExists = true)
         {
             // todo: unit tests
-            Table = AzureStorage.GetTable(connectionString, tableName);
+            Table = table;
 
             if (createTableIfNotExists)
             {

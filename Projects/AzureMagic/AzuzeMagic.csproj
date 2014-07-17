@@ -52,6 +52,9 @@
       <HintPath>..\..\packages\EmptyStringGuard.Fody.1.0.6.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\EmptyStringGuard.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Humanizer">
+      <HintPath>..\..\packages\Humanizer.1.28.0\lib\portable-win+net40+sl50+wp8+wpa81\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm">
       <HintPath>..\..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
       <Private>True</Private>
@@ -96,6 +99,8 @@
     <Compile Include="AzureTableRepository.cs" />
     <Compile Include="Exceptions\AzureMagicException.cs" />
     <Compile Include="Exceptions\AzureTableRepositoryException.cs" />
+    <Compile Include="ITableNameResolver.cs" />
+    <Compile Include="TableNameResolver.cs" />
     <Compile Include="Tools\WindowAzureStorageEmulatorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

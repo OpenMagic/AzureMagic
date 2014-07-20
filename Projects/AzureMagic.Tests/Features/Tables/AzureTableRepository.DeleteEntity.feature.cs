@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AzureMagic.Tests.Features
+namespace AzureMagic.Tests.Features.Tables
 {
     using TechTalk.SpecFlow;
     

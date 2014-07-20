@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureMagic
+namespace AzureMagic.Tables
 {
     public interface IAzureTableRepository<TEntity> where TEntity : ITableEntity, new()
     {

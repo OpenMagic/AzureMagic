@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AzureMagic.Tests.Features.Steps
+namespace AzureMagic.Tests.Support
 {
     public abstract class StepsBase : IDisposable
     {

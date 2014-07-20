@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using AzureMagic.Exceptions;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureMagic
+namespace AzureMagic.Tables
 {
     public class AzureTableRepository<TEntity> : IAzureTableRepository<TEntity> where TEntity : ITableEntity, new()
     {
         private readonly CloudTable Table;
 
         public AzureTableRepository(string connectionString, string tableName, bool createTableIfNotExists = true) :
-            this(AzureStorage.GetTable(connectionString, tableName), createTableIfNotExists)
+            this(AzureTableStorage.GetTable(connectionString, tableName), createTableIfNotExists)
         {
         }
 

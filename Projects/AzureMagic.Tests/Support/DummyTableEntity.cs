@@ -1,4 +1,5 @@
 ﻿using System;
+using AzureMagic.Tables;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzureMagic.Tests.Support

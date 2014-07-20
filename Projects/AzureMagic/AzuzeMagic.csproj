@@ -91,12 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureQueryExtensions.cs" />
-    <Compile Include="AzureStorage.cs" />
-    <Compile Include="AzureTableRepository.cs" />
+    <Compile Include="Tables\AzureTableQueryExtensions.cs" />
+    <Compile Include="Tables\AzureTableStorage.cs" />
+    <Compile Include="Tables\AzureTableRepository.cs" />
     <Compile Include="Exceptions\AzureMagicException.cs" />
     <Compile Include="Exceptions\AzureTableRepositoryException.cs" />
-    <Compile Include="IAzureTableRepository.cs" />
+    <Compile Include="Tables\IAzureTableRepository.cs" />
     <Compile Include="Tools\WindowAzureStorageEmulatorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

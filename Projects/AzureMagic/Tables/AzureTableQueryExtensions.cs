@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.WindowsAzure.Storage.Table.Queryable;
 
-namespace AzureMagic
+namespace AzureMagic.Tables
 {
-    public static class AzureQueryExtensions
+    public static class AzureTableQueryExtensions
     {
         public static async Task<IEnumerable<TEntity>> ExecuteAsync<TEntity>(this IQueryable<TEntity> query)
         {

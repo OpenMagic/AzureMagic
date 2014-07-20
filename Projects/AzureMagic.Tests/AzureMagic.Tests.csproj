@@ -116,34 +116,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\AzureExtensions.ExecuteAsync.feature.cs">
+    <Compile Include="Features\Tables\AzureExtensions.ExecuteAsync.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AzureExtensions.ExecuteAsync.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\AzureTableRepository.DeleteEntity.feature.cs">
+    <Compile Include="Features\Tables\AzureTableRepository.DeleteEntity.feature.cs">
       <DependentUpon>AzureTableRepository.DeleteEntity.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Features\AzureTableRepository.Query.feature.cs">
+    <Compile Include="Features\Tables\AzureTableRepository.Query.feature.cs">
       <DependentUpon>AzureTableRepository.Query.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Features\AzureTableRepository.AddEntity.feature.cs">
+    <Compile Include="Features\Tables\AzureTableRepository.AddEntity.feature.cs">
       <DependentUpon>AzureTableRepository.AddEntity.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Features\Steps\StepsBase.cs" />
+    <Compile Include="Features\Tables\AzureTableStorage.ValidateTableName.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AzureTableStorage.ValidateTableName.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Tables\Steps\AzureTableStorageValidateTableNameSteps.cs" />
+    <Compile Include="Support\StepsBase.cs" />
     <Compile Include="Support\DummyTableEntity.cs" />
-    <Compile Include="Features\AzureTableRepository.Constructor.feature.cs">
+    <Compile Include="Features\Tables\AzureTableRepository.Constructor.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AzureTableRepository.Constructor.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Steps\AzureTableRepositorySteps.cs" />
+    <Compile Include="Features\Tables\Steps\AzureTableRepositorySteps.cs" />
     <Compile Include="Features\Tools\WindowsAzureStorageEmulatorManager.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,25 +163,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\AzureExtensions.ExecuteAsync.feature">
+    <None Include="Features\Tables\AzureExtensions.ExecuteAsync.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureExtensions.ExecuteAsync.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\AzureTableRepository.DeleteEntity.feature">
+    <None Include="Features\Tables\AzureTableRepository.DeleteEntity.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureTableRepository.DeleteEntity.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\AzureTableRepository.Query.feature">
+    <None Include="Features\Tables\AzureTableRepository.Query.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureTableRepository.Query.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\AzureTableRepository.AddEntity.feature">
+    <None Include="Features\Tables\AzureTableRepository.AddEntity.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureTableRepository.AddEntity.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\AzureTableRepository.Constructor.feature">
+    <None Include="Features\Tables\AzureTableRepository.Constructor.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AzureTableRepository.Constructor.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Tables\AzureTableStorage.ValidateTableName.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AzureTableStorage.ValidateTableName.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Tools\WindowsAzureStorageEmulatorManager.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

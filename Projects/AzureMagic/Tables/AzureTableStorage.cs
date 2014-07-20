@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Anotar.CommonLogging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
-// todo: move to AzureMagic.
-
-namespace AzureMagic
+namespace AzureMagic.Tables
 {
-    public static class AzureStorage
+    public static class AzureTableStorage
     {
         public const string DevelopmentConnectionString = "UseDevelopmentStorage=true;";
 
@@ -90,6 +90,29 @@ namespace AzureMagic
             // todo: unit tests
             // int.MaxValue is 2,147,483,647. Therefore pad <value> is with leading 0 to 10 characters.
             return value.ToString("D10");
+        }
+
+        public static void ValidateTableName(this string tableName)
+        {
+            var regex = new Regex("^[A-Za-z][A-Za-z0-9]{2,62}$");
+
+            if (regex.IsMatch(tableName))
+            {
+                return;
+            }
+
+            var message = new StringBuilder();
+
+            message.AppendLine("Table names must conform to these rules:");
+            message.AppendLine();
+            message.AppendLine("- May contain only alphanumeric characters.");
+            message.AppendLine("- Cannot begin with a numeric character.");
+            message.AppendLine("- Are case-insensitive.");
+            message.AppendLine("- Must be from 3 to 63 characters long.");
+            message.AppendLine();
+            message.AppendLine("See http://msdn.microsoft.com/en-us/library/system.text.regularexpressions.regexoptions(v=vs.110).aspx for more details.");
+
+            throw new ValidationException(message.ToString());
         }
     }
 }

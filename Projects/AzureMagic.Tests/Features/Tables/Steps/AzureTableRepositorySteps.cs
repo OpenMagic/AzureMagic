@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using AzureMagic.Exceptions;
+using AzureMagic.Tables;
 using AzureMagic.Tests.Support;
 using AzureMagic.Tools;
 using FluentAssertions;
@@ -12,7 +13,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using TechTalk.SpecFlow;
 
-namespace AzureMagic.Tests.Features.Steps
+namespace AzureMagic.Tests.Features.Tables.Steps
 {
     [Binding]
     public class AzureTableRepositorySteps : StepsBase
@@ -66,7 +67,7 @@ namespace AzureMagic.Tests.Features.Steps
 
         private CloudTable CreateTable()
         {
-            var table = AzureStorage.GetTable(ConnectionString, TableName);
+            var table = AzureTableStorage.GetTable(ConnectionString, TableName);
 
             table.CreateIfNotExists();
 
@@ -118,14 +119,14 @@ namespace AzureMagic.Tests.Features.Steps
 
         private CloudTable GetTable()
         {
-            return AzureStorage.GetTable(ConnectionString, TableName);
+            return AzureTableStorage.GetTable(ConnectionString, TableName);
         }
 
         protected override void Cleanup()
         {
             try
             {
-                AzureStorage.GetTable(ConnectionString, TableName).DeleteIfExists();
+                AzureTableStorage.GetTable(ConnectionString, TableName).DeleteIfExists();
             }
             // ReSharper disable once EmptyGeneralCatchClause
             catch (Exception)
@@ -204,7 +205,7 @@ namespace AzureMagic.Tests.Features.Steps
         [Then(@"the table is created")]
         public void ThenTheTableIsCreated()
         {
-            AzureStorage.GetTable(ConnectionString, TableName).Exists().Should().BeTrue();
+            AzureTableStorage.GetTable(ConnectionString, TableName).Exists().Should().BeTrue();
         }
 
         [Then(@"the table remains intact")]
@@ -222,7 +223,7 @@ namespace AzureMagic.Tests.Features.Steps
         [Then(@"the table does not exist")]
         public void ThenTheTableDoesNotExist()
         {
-            AzureStorage.GetTable(ConnectionString, TableName).Exists().Should().BeFalse();
+            AzureTableStorage.GetTable(ConnectionString, TableName).Exists().Should().BeFalse();
         }
 
         [Given(@"entity is '(.*)'")]

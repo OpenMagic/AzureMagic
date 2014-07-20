@@ -11,22 +11,22 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace AzureMagic.Tests.Features
+namespace AzureMagic.Tests.Features.Tables
 {
     using TechTalk.SpecFlow;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class AzureExtensionsFeature : Xunit.IUseFixture<AzureExtensionsFeature.FixtureData>, System.IDisposable
+    public partial class AzureTableRepository_QueryFeature : Xunit.IUseFixture<AzureTableRepository_QueryFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "AzureExtensions.ExecuteAsync.feature"
+#line 1 "AzureTableRepository.Query.feature"
 #line hidden
         
-        public AzureExtensionsFeature()
+        public AzureTableRepository_QueryFeature()
         {
             this.TestInitialize();
         }
@@ -34,7 +34,7 @@ namespace AzureMagic.Tests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AzureExtensions", "", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AzureTableRepository.Query", "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,12 +74,10 @@ namespace AzureMagic.Tests.Features
  testRunner.Given("tableName is \'unique\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 7
  testRunner.Given("createTableIfNotExists is \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 8
- testRunner.Given("table has rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
-        public virtual void SetFixture(AzureExtensionsFeature.FixtureData fixtureData)
+        public virtual void SetFixture(AzureTableRepository_QueryFeature.FixtureData fixtureData)
         {
         }
         
@@ -89,19 +87,23 @@ namespace AzureMagic.Tests.Features
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "AzureExtensions")]
-        [Xunit.TraitAttribute("Description", "ExecuteAsync")]
-        public virtual void ExecuteAsync()
+        [Xunit.TraitAttribute("FeatureTitle", "AzureTableRepository.Query")]
+        [Xunit.TraitAttribute("Description", "Query")]
+        public virtual void Query()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ExecuteAsync", ((string[])(null)));
-#line 10
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Query", ((string[])(null)));
+#line 9
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
+#line 10
+ testRunner.Given("table has entities", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 11
- testRunner.When("I call ExecuteAsync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Query is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.Then("all partition keys are returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("TableQuery<TEntity> is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
+ testRunner.And("entities can be read", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -113,12 +115,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                AzureExtensionsFeature.FeatureSetup();
+                AzureTableRepository_QueryFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                AzureExtensionsFeature.FeatureTearDown();
+                AzureTableRepository_QueryFeature.FeatureTearDown();
             }
         }
     }

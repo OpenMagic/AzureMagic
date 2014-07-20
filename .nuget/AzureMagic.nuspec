@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
+    
     <metadata>
+        
         <id>AzureMagic</id>
         <version>$version$</version>
         <title>AzureMagic</title>
@@ -11,8 +13,16 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Collection of Azure utility classes.</description>
         <copyright>Copyright (c) 2013-2014 Tim Murphy</copyright>
+
+        <dependencies>
+            <dependency id="Common.Logging.Core" version="2.2.0" />
+            <dependency id="WindowsAzure.Storage" version="4.1.0" />
+        </dependencies>
+        
     </metadata>
+    
     <files>
         <file src="..\Projects\AzureMagic\bin\Release\AzureMagic.*" target="lib/net40"/>
     </files>
+    
 </package>

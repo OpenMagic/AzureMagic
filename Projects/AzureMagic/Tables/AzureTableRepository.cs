@@ -32,6 +32,11 @@ namespace AzureMagic.Tables
             }
         }
 
+        public TableResult AddEntity(TEntity entity)
+        {
+            return ExecuteOperation("add", TableOperation.Insert(entity), entity);
+        }
+
         public async Task<TableResult> AddEntityAsync(TEntity entity)
         {
             return await ExecuteOperationAsync("add", TableOperation.Insert(entity), entity);
@@ -64,35 +69,67 @@ namespace AzureMagic.Tables
             return Table.CreateQuery<TEntity>();
         }
 
+        private AzureTableRepositoryException CreateExecuteOperationException(Exception exception, TEntity entity, string operationName)
+        {
+            var message = string.Format("Cannot {3} {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey, operationName);
+
+            return new AzureTableRepositoryException(message, exception);
+        }
+
+        private TableResult ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
+        {
+            try
+            {
+                ValidateEntity(entity);
+
+                var result = Table.Execute(operation);
+
+                return ValidateResult(result);
+            }
+            catch (Exception exception)
+            {
+                throw CreateExecuteOperationException(exception, entity, operationName);
+            }
+        }
+
         private async Task<TableResult> ExecuteOperationAsync(string operationName, TableOperation operation, TEntity entity)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(entity.PartitionKey))
-                {
-                    throw new ValidationException("PartitionKey cannot be null or whitespace.");
-                }
-
-                if (entity.RowKey == null)
-                {
-                    throw new ValidationException("RowKey cannot be null.");
-                }
+                ValidateEntity(entity);
 
                 var result = await Table.ExecuteAsync(operation);
 
-                if (result.HttpStatusCode == (int) HttpStatusCode.NoContent)
-                {
-                    return result;
-                }
-
-                var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode) result.HttpStatusCode);
-                throw new AzureTableRepositoryException(message);
+                return ValidateResult(result);
             }
             catch (Exception exception)
             {
-                var message = string.Format("Cannot {3} {0}/{1}/{2}.", Table.Name, entity.PartitionKey, entity.RowKey, operationName);
-                throw new AzureTableRepositoryException(message, exception);
+                throw CreateExecuteOperationException(exception, entity, operationName);
             }
+        }
+
+        private static void ValidateEntity(TEntity entity)
+        {
+            if (string.IsNullOrWhiteSpace(entity.PartitionKey))
+            {
+                throw new ValidationException("PartitionKey cannot be null or whitespace.");
+            }
+
+            if (entity.RowKey == null)
+            {
+                throw new ValidationException("RowKey cannot be null.");
+            }
+        }
+
+        private static TableResult ValidateResult(TableResult result)
+        {
+            if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
+            {
+                return result;
+            }
+
+            var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode)result.HttpStatusCode);
+            throw new AzureTableRepositoryException(message);
         }
     }
 }

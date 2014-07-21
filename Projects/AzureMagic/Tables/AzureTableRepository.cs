@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
-using Anotar.CommonLogging;
 using AzureMagic.Exceptions;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -11,46 +10,77 @@ namespace AzureMagic.Tables
     public class AzureTableRepository<TEntity> : IAzureTableRepository<TEntity> where TEntity : ITableEntity, new()
     {
         private readonly CloudTable Table;
+        private readonly IAzureTableRepositoryLogger Logger;
 
         public AzureTableRepository(string connectionString, string tableName, bool createTableIfNotExists = true) :
-            this(AzureTableStorage.GetTable(connectionString, tableName), createTableIfNotExists)
+            this(connectionString, tableName, new NullAzureTableRepositoryLogger(), createTableIfNotExists)
         {
         }
 
-        public AzureTableRepository(CloudTableClient tableClient, string tableName, bool createTableIfNotExists = true) :
-            this(tableClient.GetTableReference(tableName), createTableIfNotExists)
+        public AzureTableRepository(string connectionString, string tableName, IAzureTableRepositoryLogger logger, bool createTableIfNotExists = true) :
+            this(AzureTableStorage.GetTable(connectionString, tableName), logger, createTableIfNotExists)
         {
         }
 
-        public AzureTableRepository(CloudTable table, bool createTableIfNotExists = true)
+        public AzureTableRepository(CloudTable table, bool createTableIfNotExists = true) :
+            this(table, new NullAzureTableRepositoryLogger(), createTableIfNotExists)
         {
+        }
+
+        public AzureTableRepository(CloudTable table, IAzureTableRepositoryLogger logger, bool createTableIfNotExists = true)
+        {
+            logger.OnConstructing(table, createTableIfNotExists);
+
             // todo: unit tests
             Table = table;
+            Logger = logger;
 
             if (createTableIfNotExists)
             {
                 Table.OnceOnlyCreateTableIfNotExists();
             }
+
+            logger.OnConstructed(table, createTableIfNotExists);
         }
 
         public TableResult AddEntity(TEntity entity)
         {
-            return ExecuteOperation("add", TableOperation.Insert(entity), entity);
+            Logger.OnAddingEntity(entity);
+
+            var result = ExecuteOperation("add", TableOperation.Insert(entity), entity);
+
+            Logger.OnAddedEntity(entity, result);
+
+            return result;
         }
 
         public async Task<TableResult> AddEntityAsync(TEntity entity)
         {
-            return await ExecuteOperationAsync("add", TableOperation.Insert(entity), entity);
+            Logger.OnAddingEntityAsync(entity);
+
+            var result = await ExecuteOperationAsync("add", TableOperation.Insert(entity), entity);
+
+            Logger.OnAddedEntityAsync(entity, result);
+
+            return result;
         }
 
         public async Task<TableResult> DeleteEntityAsync(TEntity entity)
         {
-            return await ExecuteOperationAsync("delete", TableOperation.Delete(entity), entity);
+            Logger.OnDeletingEntityAsync(entity);
+
+            var result = await ExecuteOperationAsync("delete", TableOperation.Delete(entity), entity);
+
+            Logger.OnDeletedEntityAsync(entity, result);
+
+            return result;
         }
 
         public async Task<TableResult> UpdateEntityAsync(TEntity entity, bool forceUpdate = false)
         {
             // todo: unit tests
+
+            Logger.OnUpdatingEntityAsync(entity);
 
             if (forceUpdate)
             {
@@ -62,12 +92,22 @@ namespace AzureMagic.Tables
                 throw new ValidationException("ETag cannot be null or whitespace.");
             }
 
-            return await ExecuteOperationAsync("update", TableOperation.Replace(entity), entity);
+            var result = await ExecuteOperationAsync("update", TableOperation.Replace(entity), entity);
+
+            Logger.OnUpdatedEntityAsync(entity, result);
+
+            return result;
         }
 
         public TableQuery<TEntity> Query()
         {
-            return Table.CreateQuery<TEntity>();
+            Logger.OnQueryingEntity();
+            
+            var result = Table.CreateQuery<TEntity>();
+
+            Logger.OnQueriedEntity(result);
+
+            return result;
         }
 
         private AzureTableRepositoryException CreateExecuteOperationException(Exception exception, TEntity entity, string operationName)
@@ -79,8 +119,6 @@ namespace AzureMagic.Tables
 
         private TableResult ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
         {
-            LogTo.Trace("{0} {1}/{2}/{3}", operationName, Table.Name, entity.PartitionKey, entity.RowKey);
-
             try
             {
                 ValidateEntity(entity);
@@ -97,8 +135,6 @@ namespace AzureMagic.Tables
 
         private async Task<TableResult> ExecuteOperationAsync(string operationName, TableOperation operation, TEntity entity)
         {
-            LogTo.Trace("{0} {1}/{2}/{3}", operationName, Table.Name, entity.PartitionKey, entity.RowKey);
-
             try
             {
                 ValidateEntity(entity);
@@ -128,12 +164,12 @@ namespace AzureMagic.Tables
 
         private static TableResult ValidateResult(TableResult result)
         {
-            if (result.HttpStatusCode == (int)HttpStatusCode.NoContent)
+            if (result.HttpStatusCode == (int) HttpStatusCode.NoContent)
             {
                 return result;
             }
 
-            var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode)result.HttpStatusCode);
+            var message = string.Format("Expected result.HttpStatusCode to be {0} but found {1}.", HttpStatusCode.NoContent, (HttpStatusCode) result.HttpStatusCode);
             throw new AzureTableRepositoryException(message);
         }
     }

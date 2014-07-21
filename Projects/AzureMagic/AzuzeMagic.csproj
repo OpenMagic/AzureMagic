@@ -93,6 +93,8 @@
     <Compile Include="Exceptions\AzureMagicException.cs" />
     <Compile Include="Exceptions\AzureTableRepositoryException.cs" />
     <Compile Include="Tables\IAzureTableRepository.cs" />
+    <Compile Include="Tables\IAzureTableRepositoryLogger.cs" />
+    <Compile Include="Tables\NullAzureTableRepositoryLogger.cs" />
     <Compile Include="Tools\WindowAzureStorageEmulatorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

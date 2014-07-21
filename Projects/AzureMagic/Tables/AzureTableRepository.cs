@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
+using Anotar.CommonLogging;
 using AzureMagic.Exceptions;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -78,6 +79,8 @@ namespace AzureMagic.Tables
 
         private TableResult ExecuteOperation(string operationName, TableOperation operation, TEntity entity)
         {
+            LogTo.Trace("{0} {1}/{2}/{3}", operationName, Table.Name, entity.PartitionKey, entity.RowKey);
+
             try
             {
                 ValidateEntity(entity);
@@ -94,6 +97,8 @@ namespace AzureMagic.Tables
 
         private async Task<TableResult> ExecuteOperationAsync(string operationName, TableOperation operation, TEntity entity)
         {
+            LogTo.Trace("{0} {1}/{2}/{3}", operationName, Table.Name, entity.PartitionKey, entity.RowKey);
+
             try
             {
                 ValidateEntity(entity);

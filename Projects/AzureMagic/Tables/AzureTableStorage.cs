@@ -16,6 +16,19 @@ namespace AzureMagic.Tables
         // todo: thread safe collection
         private static readonly HashSet<string> TableNames = new HashSet<string>();
 
+        public static void DeleteAllRowsIfTableExists(string connectionString, string tableName)
+        {
+            var table = GetTable(connectionString, tableName);
+
+            if (!table.Exists())
+            {
+                return;
+            }
+
+            table.Delete();
+            table.Create();
+        }
+
         public static void DeleteTableIfExists(string connectionString, string tableName)
         {
             // todo: unit tests

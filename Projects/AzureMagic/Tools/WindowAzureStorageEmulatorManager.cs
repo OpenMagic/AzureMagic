@@ -28,8 +28,10 @@ namespace AzureMagic.Tools
         {
             var possibleDirectories = new List<string>(new[]
             {
+                @"C:\Program Files (x86)\Microsoft SDKs\Azure\Storage Emulator",
+                @"C:\Program Files\Microsoft SDKs\Azure\Storage Emulator",
                 @"C:\Program Files (x86)\Microsoft SDKs\Windows Azure\Storage Emulator",
-                @"C:\Program Files\Microsoft SDKs\Windows Azure\Storage Emulator"
+                @"C:\Program Files\Microsoft SDKs\Windows Azure\Storage Emulator",
             });
 
             var possibleFileNames = possibleDirectories.Select(possibleDirectory => Path.Combine(possibleDirectory, "WAStorageEmulator.exe"));
